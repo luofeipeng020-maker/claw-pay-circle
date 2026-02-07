@@ -144,4 +144,34 @@ export class CircleService {
       throw error;
     }
   }
+
+  /**
+   * 获取交易状态
+   */
+  async getTransaction(txId: string) {
+    try {
+      const response = await this.client.getTransaction({
+        id: txId,
+      });
+      return response.data.transaction;
+    } catch (error: any) {
+      console.error('获取交易状态失败:', error.response?.data || error.message);
+      throw error;
+    }
+  }
+
+  /**
+   * 获取钱包的交易列表
+   */
+  async listTransactions(walletId: string) {
+    try {
+      const response = await this.client.listTransactions({
+        walletIds: [walletId],
+      });
+      return response.data.transactions;
+    } catch (error: any) {
+      console.error('获取交易列表失败:', error.response?.data || error.message);
+      throw error;
+    }
+  }
 }
